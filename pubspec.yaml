@@ -37,6 +37,22 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  flutter_launcher_icons: "^0.10.0"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/wallpaper_stop.png"
+  min_sdk_android: 21 
+  web:
+    generate: true
+    image_path: "assets/wallpaper_stop.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/wallpaper_stop.png"
+    icon_size: 48 
 
 dev_dependencies:
   flutter_test:
