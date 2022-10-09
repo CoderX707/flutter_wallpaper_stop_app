@@ -1,9 +1,4 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +12,6 @@ class ImageView extends StatefulWidget {
 }
 
 class _ImageViewState extends State<ImageView> {
-  var filePath;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +27,7 @@ class _ImageViewState extends State<ImageView> {
                   : CachedNetworkImage(
                       imageUrl: widget.imgPath,
                       placeholder: (context, url) => Container(
-                        color:const Color(0xfff5f8fd),
+                        color: const Color(0xfff5f8fd),
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -67,7 +60,7 @@ class _ImageViewState extends State<ImageView> {
                                 border:
                                     Border.all(color: Colors.white24, width: 1),
                                 borderRadius: BorderRadius.circular(40),
-                                gradient:const LinearGradient(
+                                gradient: const LinearGradient(
                                     colors: [
                                       Color(0x36FFFFFF),
                                       Color(0x0FFFFFFF)
@@ -76,7 +69,7 @@ class _ImageViewState extends State<ImageView> {
                                     end: FractionalOffset.bottomRight)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children:const <Widget>[
+                              children: const <Widget>[
                                 Text(
                                   "Set Wallpaper",
                                   style: TextStyle(
@@ -98,14 +91,14 @@ class _ImageViewState extends State<ImageView> {
                             )),
                       ],
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     "Cancel",
                     style: TextStyle(
                         color: Colors.white60,
@@ -113,7 +106,7 @@ class _ImageViewState extends State<ImageView> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 )
               ],

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper_stop/helper/colors_code.dart';
 import 'package:wallpaper_stop/views/home.dart';
 
 void main() {
-  runApp(const WallpaperStop());
+  runApp(WallpaperStop());
 }
 
 class WallpaperStop extends StatelessWidget {
-  const WallpaperStop({super.key});
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Wallpaper App',
-      theme: ThemeData(
-        primaryColor: Colors.white,
-      ),
+      title: 'Wallpapers Stop',
       home: Home(),
     );
   }

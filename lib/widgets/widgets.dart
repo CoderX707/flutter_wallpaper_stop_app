@@ -3,31 +3,29 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper_stop/controller/popup_controller.dart';
 
-import 'package:wallpaper_stop/helper/colors_code.dart';
 import 'package:wallpaper_stop/model/wallpaper_model.dart';
 import 'package:wallpaper_stop/views/image_view.dart';
 
-Widget brandName(String title) {
+Widget brandName(context, String title) {
   return title != ''
       ? Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
               title.toUpperCase(),
-              style: const TextStyle(color: whiteColor),
             ),
           ],
         )
       : Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
+          children: <Widget>[
+            const Text(
               "Wallpapers ",
-              style: TextStyle(color: whiteColor),
             ),
             Text(
               "Stop",
-              style: TextStyle(color: primaryColor),
+              style:
+                  TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
           ],
         );

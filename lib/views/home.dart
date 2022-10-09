@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:wallpaper_stop/config/config.dart';
 import 'package:wallpaper_stop/helper/category_helper.dart';
-import 'package:wallpaper_stop/helper/colors_code.dart';
 import 'package:wallpaper_stop/helper/constants.dart';
 import 'package:wallpaper_stop/model/category_model.dart';
 import 'package:wallpaper_stop/model/wallpaper_model.dart';
@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
   List<CategoriesModel> categories = [];
   List<WallpaperModel> wallpapers = [];
   bool _loading = true;
+  late bool isLight;
 
   TextEditingController searchController = TextEditingController();
 
@@ -44,17 +45,28 @@ class _HomeState extends State<Home> {
   void initState() {
     getTrendingWallpapers();
     categories = getCategories()!;
+    // check current theme mode
+    var brightness = SchedulerBinding.instance.window.platformBrightness;
+    isLight = brightness == Brightness.light;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: secondaryColor,
-        title: brandName(''),
+        title: brandName(context, ''),
         elevation: 0.0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              isLight = !isLight;
+              Get.changeThemeMode(isLight ? ThemeMode.light : ThemeMode.dark);
+            },
+            icon: Icon(
+                isLight ? Icons.wb_sunny_outlined : Icons.mode_night_outlined),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(
@@ -64,7 +76,7 @@ class _HomeState extends State<Home> {
             // Search Box
             Container(
               decoration: BoxDecoration(
-                color: whiteColor,
+                color: Theme.of(context).colorScheme.onSecondary,
                 borderRadius: BorderRadius.circular(30),
               ),
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -74,7 +86,11 @@ class _HomeState extends State<Home> {
                   Expanded(
                     child: TextField(
                       controller: searchController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        hintStyle: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer),
                         hintText: "Search wallpapers",
                         border: InputBorder.none,
                       ),
@@ -90,8 +106,9 @@ class _HomeState extends State<Home> {
                             ),
                           ));
                     },
-                    child: const Icon(
+                    child: Icon(
                       Icons.search,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                     ),
                   )
                 ],
@@ -166,7 +183,6 @@ class CategoryCard extends StatelessWidget {
               child: Text(
                 categoryName,
                 style: const TextStyle(
-                  color: whiteColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),

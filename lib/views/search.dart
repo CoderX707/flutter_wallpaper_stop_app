@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:wallpaper_stop/config/config.dart';
-import 'package:wallpaper_stop/helper/colors_code.dart';
 import 'package:wallpaper_stop/helper/constants.dart';
 import 'package:wallpaper_stop/model/wallpaper_model.dart';
 import 'package:wallpaper_stop/widgets/widgets.dart';
@@ -45,13 +44,9 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: secondaryColor,
-        iconTheme: const IconThemeData(
-          color: primaryColor,
-        ),
-        title: brandName(widget.searchQuery),
+        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+        title: brandName(context,widget.searchQuery),
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
